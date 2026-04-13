@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Stanford Course Advisor</title>
+  <link rel="stylesheet" href="src/styles.css"/>
+  <script>
+    if (!sessionStorage.getItem("ob_profile")) {
+      window.location.replace("onboarding.html");
+    }
+  </script>
+</head>
+<body>
+ 
+  <div class="topnav">
+    <span class="logo">Stanford · Course Planner</span>
+    <div class="tabs">
+      <div class="tab active" onclick="switchTab('quarters', this)">Quarter planner</div>
+      <div class="tab" onclick="switchTab('4yr', this)">4-year plan</div>
+      <div class="tab" onclick="switchTab('reqs', this)">Requirements</div>
+    </div>
+    <span class="student" id="topnav-student">—</span>
+  </div>
+ 
+  <div class="main">
+ 
+    <div class="student-bar">
+      <div>
+        <div class="s-name" id="banner-name">—</div>
+        <div class="s-meta" id="banner-meta">—</div>
+      </div>
+      <div class="s-tags" id="banner-tags"></div>
+    </div>
+ 
+    <!-- ── QUARTER PLANNER ── -->
+    <div id="view-quarters">
+      <div class="section-label">Autumn 2025 – Autumn 2026</div>
+      <div class="quarters" id="quarters-container">
+ 
+        <div class="quarter">
+          <div class="q-head">
+            <span class="q-title">Autumn 2025</span>
+            <span class="q-units" id="units-autumn25">completed</span>
+          </div>
+          <div class="q-slots" id="slots-autumn25"
+            ondragover="dragOver(event)" ondrop="drop(event, 'slots-autumn25')">
+            <div class="empty-slot">+ drop here</div>
+          </div>
+        </div>
+ 
+        <div class="quarter">
+          <div class="q-head">
+            <span class="q-title">Winter 2026</span>
+            <span class="q-units" id="units-winter26">in progress</span>
+          </div>
+          <div class="q-slots" id="slots-winter26"
+            ondragover="dragOver(event)" ondrop="drop(event, 'slots-winter26')">
+            <div class="empty-slot">+ drop here</div>
+          </div>
+        </div>
+ 
+        <div class="quarter">
+          <div class="q-head">
+            <span class="q-title">Spring 2026</span>
+            <span class="q-units" id="units-spring26">planning</span>
+          </div>
+          <div class="q-slots" id="slots-spring26"
+            ondragover="dragOver(event)" ondrop="drop(event, 'slots-spring26')">
+            <div class="empty-slot">+ drop here</div>
+            <div class="empty-slot">+ drop here</div>
+            <div class="empty-slot">+ drop here</div>
+          </div>
+        </div>
+ 
+        <div class="quarter">
+          <div class="q-head">
+            <span class="q-title">Autumn 2026</span>
+            <span class="q-units" id="units-autumn26">planning</span>
+          </div>
+          <div class="q-slots" id="slots-autumn26"
+            ondragover="dragOver(event)" ondrop="drop(event, 'slots-autumn26')">
+            <div class="empty-slot">+ drop here</div>
+            <div class="empty-slot">+ drop here</div>
+            <div class="empty-slot">+ drop here</div>
+            <div class="empty-slot">+ drop here</div>
+          </div>
+        </div>
+ 
+      </div>
+ 
+      <div class="section-label">Advisor suggestions — drag into any quarter</div>
+      <div class="suggestions-row" id="suggestion-bank"></div>
+    </div>
+ 
+    <!-- ── 4-YEAR VIEW ── -->
+    <div id="view-4yr" class="hidden">
+      <div class="section-label">4-year overview · CS major</div>
+      <div class="fouryear">
+        <div class="yr-col">
+          <div class="yr-head">Year 1 · Freshman</div>
+          <div class="yr-quarters">
+            <div class="mini-q"><div class="mini-q-label">Autumn</div><div class="mini-pills"><div class="mini-pill cs">CS 106B</div><div class="mini-pill math">MATH 51</div><div class="mini-pill hum">PWR 1FY</div></div></div>
+            <div class="mini-q"><div class="mini-q-label">Winter</div><div class="mini-pills"><div class="mini-pill cs">CS 107</div><div class="mini-pill math">MATH 52</div></div></div>
+            <div class="mini-q"><div class="mini-q-label">Spring</div><div class="mini-pills"><div class="mini-pill cs">CS 109</div><div class="mini-pill math">MATH 53</div></div></div>
+          </div>
+        </div>
+        <div class="yr-col">
+          <div class="yr-head">Year 2 · Sophomore</div>
+          <div class="yr-quarters">
+            <div class="mini-q"><div class="mini-q-label">Autumn</div><div class="mini-pills"><div class="mini-pill cs">CS 161</div><div class="mini-pill cs">CS 110</div></div></div>
+            <div class="mini-q"><div class="mini-q-label">Winter</div><div class="mini-pills"><div class="mini-pill cs">CS 147</div><div class="mini-pill neutral">Elective</div></div></div>
+            <div class="mini-q"><div class="mini-q-label">Spring</div><div class="mini-pills"><div class="mini-pill neutral">TBD</div></div></div>
+          </div>
+        </div>
+        <div class="yr-col">
+          <div class="yr-head">Year 3 · Junior</div>
+          <div class="yr-quarters">
+            <div class="mini-q"><div class="mini-q-label">Autumn</div><div class="mini-pills"><div class="mini-pill cs">CS 221</div><div class="mini-pill neutral">Track elective</div></div></div>
+            <div class="mini-q"><div class="mini-q-label">Winter / Spring</div><div class="mini-pills"><div class="mini-pill neutral">Depth electives</div></div></div>
+          </div>
+        </div>
+        <div class="yr-col">
+          <div class="yr-head">Year 4 · Senior</div>
+          <div class="yr-quarters">
+            <div class="mini-q"><div class="mini-q-label">All quarters</div><div class="mini-pills"><div class="mini-pill cs">CS 191W capstone</div><div class="mini-pill neutral">Free electives</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- ── REQUIREMENTS VIEW — rendered by profile.js ── -->
+    <div id="view-reqs" class="hidden">
+      <div class="section-label">CS degree requirements</div>
+      <div id="reqs-checklist"></div>
+    </div>
+ 
+  </div><!-- /main -->
+ 
+  <div id="trash-zone"
+    ondragover="event.preventDefault(); this.classList.add('drag-over')"
+    ondragleave="this.classList.remove('drag-over')"
+    ondrop="this.classList.remove('drag-over'); handleTrashDrop(event)">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M9 3h6l1 1h4v2H4V4h4L9 3zm-4 5h14l-1 13H6L5 8zm5 2v9h1v-9h-1zm3 0v9h1v-9h-1z"/>
+    </svg>
+    Remove course
+  </div>
+ 
+  <div class="advisor-bubble">
+    <div class="chat-window" id="chat-window">
+      <div class="chat-head">
+        <div class="chat-head-avatar">SA</div>
+        <div class="chat-head-info">
+          <div class="title">Stanford Advisor</div>
+          <div class="sub">Powered by Claude · online</div>
+        </div>
+      </div>
+      <div class="chat-msgs" id="chat-msgs">
+        <div class="cmsg advisor" id="advisor-greeting">Hi! Loading your plan…</div>
+      </div>
+      <div class="quick-replies" id="quick-replies">
+        <span class="qr" onclick="sendQuick(this)">What should I take next?</span>
+        <span class="qr" onclick="sendQuick(this)">Am I on track to graduate?</span>
+        <span class="qr" onclick="sendQuick(this)">What are my remaining requirements?</span>
+      </div>
+      <div class="chat-input-row">
+        <input type="text" id="chat-input" placeholder="Ask about courses…"
+          onkeydown="if(event.key==='Enter') sendMsg()"/>
+        <button onclick="sendMsg()">Send</button>
+      </div>
+    </div>
+    <button class="advisor-btn" onclick="toggleChat()" title="Open advisor">
+      <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+    </button>
+    <div class="advisor-badge" id="advisor-badge"></div>
+  </div>
+ 
+  <!-- load order: data → profile → suggestions → planner → advisor -->
+  <script src="src/data.js"></script>
+  <script src="src/profile.js"></script>
+  <script src="src/suggestions.js"></script>
+  <script src="src/planner.js"></script>
+  <script src="src/advisor.js"></script>
+</body>
+</html>

@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Stanford Course Planner · Setup</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap');
+ 
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+    :root {
+      --cardinal:   #8C1515;
+      --cardinal-dk:#6A0F0F;
+      --sand:       #F4F0E8;
+      --warm-gray:  #E8E4DC;
+      --stone:      #B8B0A0;
+      --ink:        #1A1714;
+      --ink-mid:    #4A4540;
+      --ink-light:  #7A7570;
+      --white:      #FDFCFA;
+      --green:      #2E6B3E;
+      --radius:     10px;
+    }
+ 
+    html, body {
+      min-height: 100vh;
+      background: var(--sand);
+      font-family: 'DM Sans', sans-serif;
+      color: var(--ink);
+    }
+ 
+    /* ── HEADER ── */
+    .ob-header {
+      background: var(--cardinal);
+      padding: 18px 40px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .ob-logo {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-weight: 300;
+      font-size: 18px;
+      color: #fff;
+      letter-spacing: 0.02em;
+    }
+    .ob-logo span { opacity: 0.6; margin: 0 8px; }
+ 
+    /* ── LAYOUT ── */
+    .ob-wrap {
+      max-width: 680px;
+      margin: 52px auto 80px;
+      padding: 0 24px;
+    }
+ 
+    .ob-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cardinal);
+      margin-bottom: 10px;
+    }
+ 
+    .ob-title {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 34px;
+      font-weight: 300;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+ 
+    .ob-sub {
+      font-size: 14px;
+      color: var(--ink-light);
+      margin-bottom: 44px;
+      line-height: 1.6;
+    }
+ 
+    /* ── STEPS ── */
+    .ob-steps {
+      display: flex;
+      gap: 0;
+      margin-bottom: 40px;
+    }
+    .ob-step-dot {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--warm-gray);
+      border: 2px solid var(--warm-gray);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 500; color: var(--stone);
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    .ob-step-dot.active {
+      background: var(--cardinal);
+      border-color: var(--cardinal);
+      color: #fff;
+    }
+    .ob-step-dot.done {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff;
+    }
+    .ob-step-line {
+      flex: 1;
+      height: 2px;
+      background: var(--warm-gray);
+      margin: 13px 6px;
+      border-radius: 1px;
+    }
+ 
+    /* ── SECTION ── */
+    .ob-section {
+      display: none;
+    }
+    .ob-section.active { display: block; }
+ 
+    .ob-section-title {
+      font-family: 'Source Serif 4', serif;
+      font-size: 20px;
+      font-weight: 400;
+      margin-bottom: 22px;
+      color: var(--ink);
+    }
+ 
+    /* ── FORM FIELDS ── */
+    .ob-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .ob-row.single { grid-template-columns: 1fr; }
+ 
+    .ob-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+ 
+    label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--ink-mid);
+    }
+ 
+    input[type="text"], select {
+      height: 42px;
+      padding: 0 14px;
+      background: var(--white);
+      border: 1.5px solid var(--warm-gray);
+      border-radius: var(--radius);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.15s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    input[type="text"]:focus, select:focus {
+      border-color: var(--cardinal);
+    }
+ 
+    /* custom select arrow */
+    .select-wrap {
+      position: relative;
+    }
+    .select-wrap::after {
+      content: "▾";
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--stone);
+      pointer-events: none;
+      font-size: 12px;
+    }
+ 
+    /* ── COURSE TAKEN GRID ── */
+    .ob-course-note {
+      font-size: 13px;
+      color: var(--ink-light);
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+ 
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+ 
+    .course-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 13px;
+      border-radius: 8px;
+      border: 1.5px solid var(--warm-gray);
+      background: var(--white);
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      user-select: none;
+    }
+    .course-toggle:hover { border-color: var(--stone); }
+    .course-toggle.selected {
+      border-color: var(--cardinal);
+      background: #FDF5F5;
+    }
+ 
+    .ct-check {
+      width: 16px; height: 16px;
+      border-radius: 4px;
+      border: 1.5px solid var(--warm-gray);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.15s;
+    }
+    .course-toggle.selected .ct-check {
+      background: var(--cardinal);
+      border-color: var(--cardinal);
+    }
+    .ct-check-mark {
+      display: none;
+      color: #fff;
+      font-size: 10px;
+      line-height: 1;
+    }
+    .course-toggle.selected .ct-check-mark { display: block; }
+ 
+    .ct-info { flex: 1; min-width: 0; }
+    .ct-code { font-size: 13px; font-weight: 500; color: var(--ink); }
+    .ct-name { font-size: 11px; color: var(--ink-light); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+ 
+    .ob-also-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--ink-mid);
+      margin: 18px 0 8px;
+    }
+ 
+    /* ── TRACK CARDS ── */
+    .track-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+ 
+    .track-card {
+      padding: 16px 18px;
+      border-radius: var(--radius);
+      border: 1.5px solid var(--warm-gray);
+      background: var(--white);
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      user-select: none;
+    }
+    .track-card:hover { border-color: var(--stone); }
+    .track-card.selected {
+      border-color: var(--cardinal);
+      background: #FDF5F5;
+    }
+    .track-card.full-width { grid-column: 1 / -1; }
+ 
+    .tc-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 3px;
+    }
+    .tc-desc {
+      font-size: 12px;
+      color: var(--ink-light);
+      line-height: 1.4;
+    }
+    .tc-courses {
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .tc-tag {
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 99px;
+      background: var(--warm-gray);
+      color: var(--ink-mid);
+    }
+ 
+    /* ── NAVIGATION ── */
+    .ob-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 36px;
+      padding-top: 24px;
+      border-top: 1px solid var(--warm-gray);
+    }
+ 
+    .btn-back {
+      font-size: 14px;
+      color: var(--ink-light);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px 0;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .btn-back:hover { color: var(--ink); }
+ 
+    .btn-next {
+      padding: 11px 28px;
+      background: var(--cardinal);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn-next:hover { background: var(--cardinal-dk); }
+    .btn-next:disabled { background: var(--stone); cursor: not-allowed; }
+ 
+    /* ── REVIEW SECTION ── */
+    .review-card {
+      background: var(--white);
+      border: 1px solid var(--warm-gray);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      margin-bottom: 14px;
+    }
+    .review-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 8px;
+    }
+    .review-value {
+      font-size: 15px;
+      color: var(--ink);
+      font-weight: 400;
+    }
+    .review-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+    .review-pill {
+      font-size: 12px;
+      padding: 3px 10px;
+      border-radius: 99px;
+      background: var(--warm-gray);
+      color: var(--ink-mid);
+    }
+  </style>
+</head>
+<body>
+ 
+<div class="ob-header">
+  <div class="ob-logo">Stanford <span>·</span> Course Planner</div>
+</div>
+ 
+<div class="ob-wrap">
+ 
+  <div class="ob-eyebrow">Getting started</div>
+  <h1 class="ob-title">Let's build your plan.</h1>
+  <p class="ob-sub">Tell us a bit about yourself and what you've taken — we'll map your requirements and suggest what to take next.</p>
+ 
+  <!-- Step indicators -->
+  <div class="ob-steps">
+    <div class="ob-step-dot active" id="dot-1">1</div>
+    <div class="ob-step-line"></div>
+    <div class="ob-step-dot" id="dot-2">2</div>
+    <div class="ob-step-line"></div>
+    <div class="ob-step-dot" id="dot-3">3</div>
+    <div class="ob-step-line"></div>
+    <div class="ob-step-dot" id="dot-4">4</div>
+  </div>
+ 
+  <!-- ── STEP 1: Basic Info ── -->
+  <div class="ob-section active" id="step-1">
+    <div class="ob-section-title">About you</div>
+ 
+    <div class="ob-row">
+      <div class="ob-field">
+        <label for="inp-first">First name</label>
+        <input type="text" id="inp-first" placeholder="Alex"/>
+      </div>
+      <div class="ob-field">
+        <label for="inp-last">Last name</label>
+        <input type="text" id="inp-last" placeholder="Chen"/>
+      </div>
+    </div>
+ 
+    <div class="ob-row">
+      <div class="ob-field">
+        <label for="inp-major">Major</label>
+        <div class="select-wrap">
+          <select id="inp-major">
+            <option value="">Select major…</option>
+            <option value="CS" selected>Computer Science</option>
+            <option value="MS&E">Management Science & Engineering</option>
+            <option value="EE">Electrical Engineering</option>
+            <option value="Math">Mathematics</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="ob-field">
+        <label for="inp-year">Class year</label>
+        <div class="select-wrap">
+          <select id="inp-year">
+            <option value="">Select year…</option>
+            <option value="2028">2028 (Freshman)</option>
+            <option value="2027">2027 (Sophomore)</option>
+            <option value="2026">2026 (Junior)</option>
+            <option value="2025">2025 (Senior)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="ob-row single">
+      <div class="ob-field">
+        <label for="inp-units">Units completed so far</label>
+        <input type="text" id="inp-units" placeholder="e.g. 45"/>
+      </div>
+    </div>
+ 
+    <div class="ob-nav">
+      <span></span>
+      <button class="btn-next" onclick="goToStep(2)">Continue →</button>
+    </div>
+  </div>
+ 
+  <!-- ── STEP 2: Track ── -->
+  <div class="ob-section" id="step-2">
+    <div class="ob-section-title">Choose your CS track</div>
+ 
+    <div class="track-grid" id="track-grid">
+ 
+      <div class="track-card" data-track="AI" onclick="selectTrack(this)">
+        <div class="tc-name">Artificial Intelligence</div>
+        <div class="tc-desc">ML, NLP, vision, reasoning, autonomous systems</div>
+        <div class="tc-courses">
+          <span class="tc-tag">CS 221</span>
+          <span class="tc-tag">CS 229</span>
+          <span class="tc-tag">CS 231N</span>
+          <span class="tc-tag">CS 224N</span>
+        </div>
+      </div>
+ 
+      <div class="track-card" data-track="Systems" onclick="selectTrack(this)">
+        <div class="tc-name">Systems</div>
+        <div class="tc-desc">OS, networking, databases, compilers, parallel computing</div>
+        <div class="tc-courses">
+          <span class="tc-tag">CS 110</span>
+          <span class="tc-tag">CS 140</span>
+          <span class="tc-tag">CS 143</span>
+          <span class="tc-tag">CS 144</span>
+        </div>
+      </div>
+ 
+      <div class="track-card" data-track="Theory" onclick="selectTrack(this)">
+        <div class="tc-name">Theory</div>
+        <div class="tc-desc">Algorithms, complexity, cryptography, logic</div>
+        <div class="tc-courses">
+          <span class="tc-tag">CS 154</span>
+          <span class="tc-tag">CS 161</span>
+          <span class="tc-tag">CS 265</span>
+          <span class="tc-tag">CS 255</span>
+        </div>
+      </div>
+ 
+      <div class="track-card" data-track="HCI" onclick="selectTrack(this)">
+        <div class="tc-name">Human-Computer Interaction</div>
+        <div class="tc-desc">Design, user research, mobile, social computing</div>
+        <div class="tc-courses">
+          <span class="tc-tag">CS 147</span>
+          <span class="tc-tag">CS 193P</span>
+          <span class="tc-tag">CS 247</span>
+          <span class="tc-tag">CS 278</span>
+        </div>
+      </div>
+ 
+      <div class="track-card full-width" data-track="Unspecialized" onclick="selectTrack(this)">
+        <div class="tc-name">Unspecialized</div>
+        <div class="tc-desc">No specific track — 21+ units of any CS 100+ courses</div>
+      </div>
+ 
+    </div>
+ 
+    <div class="ob-nav">
+      <button class="btn-back" onclick="goToStep(1)">← Back</button>
+      <button class="btn-next" id="btn-next-2" disabled onclick="goToStep(3)">Continue →</button>
+    </div>
+  </div>
+ 
+  <!-- ── STEP 3: Courses taken ── -->
+  <div class="ob-section" id="step-3">
+    <div class="ob-section-title">Courses you've completed</div>
+    <p class="ob-course-note">Select everything you've finished or are currently enrolled in. We'll mark these as complete and skip them in your plan.</p>
+ 
+    <div id="course-checklist"><!-- populated by JS --></div>
+ 
+    <div class="ob-nav">
+      <button class="btn-back" onclick="goToStep(2)">← Back</button>
+      <button class="btn-next" onclick="goToStep(4)">Continue →</button>
+    </div>
+  </div>
+ 
+  <!-- ── STEP 4: Review ── -->
+  <div class="ob-section" id="step-4">
+    <div class="ob-section-title">Looks good?</div>
+ 
+    <div class="review-card">
+      <div class="review-label">Student</div>
+      <div class="review-value" id="rv-name">—</div>
+    </div>
+    <div class="review-card">
+      <div class="review-label">Major · Track · Class</div>
+      <div class="review-value" id="rv-track">—</div>
+    </div>
+    <div class="review-card">
+      <div class="review-label">Completed courses</div>
+      <div class="review-pills" id="rv-courses">—</div>
+    </div>
+ 
+    <div class="ob-nav">
+      <button class="btn-back" onclick="goToStep(3)">← Back</button>
+      <button class="btn-next" onclick="finishOnboarding()">Build my plan →</button>
+    </div>
+  </div>
+ 
+</div><!-- /ob-wrap -->
+ 
+<script>
+// ── STATE ─────────────────────────────────────
+const state = {
+  firstName: "", lastName: "", major: "CS", year: "", units: "",
+  track: "", takenCodes: new Set()
+};
+ 
+// ── COURSE LIST FOR CHECKLIST ─────────────────
+const CHECKLIST_COURSES = [
+  // Math
+  { code: "MATH 19",  name: "Calculus I",          group: "Math" },
+  { code: "MATH 20",  name: "Calculus II",          group: "Math" },
+  { code: "MATH 21",  name: "Calculus (accel.)",    group: "Math" },
+  { code: "MATH 51",  name: "Linear Algebra",       group: "Math" },
+  { code: "MATH 52",  name: "Integral Calculus",    group: "Math" },
+  { code: "MATH 53",  name: "ODE",                  group: "Math" },
+  // CS Core
+  { code: "CS 103",   name: "Math Foundations",     group: "CS Core" },
+  { code: "CS 106A",  name: "Prog. Methodology",    group: "CS Core" },
+  { code: "CS 106B",  name: "Prog. Abstractions",   group: "CS Core" },
+  { code: "CS 107",   name: "Computer Org.",        group: "CS Core" },
+  { code: "CS 107E",  name: "Computer Org. (RPi)",  group: "CS Core" },
+  { code: "CS 109",   name: "Probability for CS",   group: "CS Core" },
+  { code: "CS 110",   name: "Computer Systems",     group: "CS Core" },
+  { code: "CS 111",   name: "OS Principles",        group: "CS Core" },
+  { code: "CS 161",   name: "Algorithms",           group: "CS Core" },
+  { code: "CS 221",   name: "AI",                   group: "CS Core" },
+  // Physics
+  { code: "PHYS 41",  name: "Mechanics",            group: "Physics" },
+  { code: "PHYS 43",  name: "E&M",                  group: "Physics" },
+  { code: "ENGR 40M", name: "Intro Electronics",    group: "Physics" },
+  // Writing
+  { code: "PWR 1FY",  name: "Writing & Rhetoric",   group: "Writing" },
+  { code: "PWR 2",    name: "Writing 2",             group: "Writing" },
+];
+ 
+// ── STEP NAVIGATION ───────────────────────────
+function goToStep(n) {
+  // collect current values
+  state.firstName = document.getElementById("inp-first")?.value.trim() || state.firstName;
+  state.lastName  = document.getElementById("inp-last")?.value.trim()  || state.lastName;
+  state.major     = document.getElementById("inp-major")?.value        || state.major;
+  state.year      = document.getElementById("inp-year")?.value         || state.year;
+  state.units     = document.getElementById("inp-units")?.value.trim() || state.units;
+ 
+  // update steps
+  document.querySelectorAll(".ob-section").forEach(s => s.classList.remove("active"));
+  document.getElementById(`step-${n}`).classList.add("active");
+ 
+  // update dots
+  for (let i = 1; i <= 4; i++) {
+    const dot = document.getElementById(`dot-${i}`);
+    dot.classList.remove("active","done");
+    if (i < n)      dot.classList.add("done");
+    else if (i === n) dot.classList.add("active");
+  }
+ 
+  if (n === 3) renderChecklist();
+  if (n === 4) renderReview();
+ 
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+ 
+// ── TRACK SELECTION ───────────────────────────
+function selectTrack(el) {
+  document.querySelectorAll(".track-card").forEach(c => c.classList.remove("selected"));
+  el.classList.add("selected");
+  state.track = el.dataset.track;
+  document.getElementById("btn-next-2").disabled = false;
+}
+ 
+// ── CHECKLIST RENDERER ────────────────────────
+function renderChecklist() {
+  const container = document.getElementById("course-checklist");
+  container.innerHTML = "";
+ 
+  const groups = {};
+  CHECKLIST_COURSES.forEach(c => {
+    if (!groups[c.group]) groups[c.group] = [];
+    groups[c.group].push(c);
+  });
+ 
+  Object.entries(groups).forEach(([group, courses]) => {
+    const label = document.createElement("div");
+    label.className = "ob-also-label";
+    label.textContent = group;
+    container.appendChild(label);
+ 
+    const grid = document.createElement("div");
+    grid.className = "course-grid";
+ 
+    courses.forEach(c => {
+      const tog = document.createElement("div");
+      tog.className = "course-toggle" + (state.takenCodes.has(c.code) ? " selected" : "");
+      tog.dataset.code = c.code;
+      tog.innerHTML = `
+        <div class="ct-check"><span class="ct-check-mark">✓</span></div>
+        <div class="ct-info">
+          <div class="ct-code">${c.code}</div>
+          <div class="ct-name">${c.name}</div>
+        </div>
+      `;
+      tog.onclick = () => {
+        tog.classList.toggle("selected");
+        if (tog.classList.contains("selected")) {
+          state.takenCodes.add(c.code);
+        } else {
+          state.takenCodes.delete(c.code);
+        }
+      };
+      grid.appendChild(tog);
+    });
+ 
+    container.appendChild(grid);
+  });
+}
+ 
+// ── REVIEW RENDERER ───────────────────────────
+function renderReview() {
+  document.getElementById("rv-name").textContent =
+    `${state.firstName} ${state.lastName}`.trim() || "—";
+ 
+  const yearLabel = {
+    "2028": "Freshman", "2027": "Sophomore",
+    "2026": "Junior",   "2025": "Senior"
+  }[state.year] || state.year;
+ 
+  document.getElementById("rv-track").textContent =
+    `${state.major} · ${state.track} track · Class of ${state.year} (${yearLabel})`;
+ 
+  const pillsEl = document.getElementById("rv-courses");
+  pillsEl.innerHTML = "";
+  if (state.takenCodes.size === 0) {
+    pillsEl.textContent = "None selected";
+  } else {
+    state.takenCodes.forEach(code => {
+      const p = document.createElement("span");
+      p.className = "review-pill";
+      p.textContent = code;
+      pillsEl.appendChild(p);
+    });
+  }
+}
+ 
+// ── FINISH & HAND OFF ─────────────────────────
+function finishOnboarding() {
+  // Persist to sessionStorage so index.html can read it
+  sessionStorage.setItem("ob_profile", JSON.stringify({
+    firstName:  state.firstName,
+    lastName:   state.lastName,
+    major:      state.major,
+    year:       state.year,
+    units:      state.units,
+    track:      state.track,
+    takenCodes: Array.from(state.takenCodes)
+  }));
+  window.location.href = "index.html";
+}
+</script>
+ 
+</body>
+</html>

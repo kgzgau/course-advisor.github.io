@@ -1,0 +1,696 @@
+{
+  "degree": "BS Computer Science",
+  "bulletin": "2024-25",
+  "tracks": [
+    "AI",
+    "Systems",
+    "Theory",
+    "HCI",
+    "Unspecialized"
+  ],
+  "requirements": {
+    "math_foundation": {
+      "label": "Math Foundation",
+      "min_units": 26,
+      "courses": [
+        {
+          "code": "MATH 19",
+          "title": "Calculus I",
+          "units": 3,
+          "alt": [
+            "MATH 21"
+          ]
+        },
+        {
+          "code": "MATH 20",
+          "title": "Calculus II",
+          "units": 3,
+          "alt": [
+            "MATH 21"
+          ]
+        },
+        {
+          "code": "MATH 21",
+          "title": "Calculus I+II (accelerated)",
+          "units": 5,
+          "alt": [
+            "MATH 19",
+            "MATH 20"
+          ]
+        },
+        {
+          "code": "MATH 51",
+          "title": "Linear Algebra & Diff Calc",
+          "units": 5,
+          "alt": [
+            "CME 100"
+          ]
+        },
+        {
+          "code": "MATH 52",
+          "title": "Integral Calculus",
+          "units": 5,
+          "alt": [
+            "CME 102"
+          ]
+        },
+        {
+          "code": "MATH 53",
+          "title": "ODE",
+          "units": 5,
+          "alt": [
+            "CME 102"
+          ]
+        },
+        {
+          "code": "MATH 109",
+          "title": "Introduction to Proofs",
+          "units": 3,
+          "alt": [
+            "CS 103"
+          ]
+        },
+        {
+          "code": "CS 103",
+          "title": "Mathematical Foundations of CS",
+          "units": 5,
+          "alt": [
+            "MATH 109"
+          ]
+        }
+      ]
+    },
+    "science": {
+      "label": "Science",
+      "note": "One of the Physics sequences + one approved science elective",
+      "courses": [
+        {
+          "code": "PHYS 41",
+          "title": "Mechanics",
+          "units": 4,
+          "alt": [
+            "PHYS 21",
+            "PHYS 61"
+          ]
+        },
+        {
+          "code": "PHYS 43",
+          "title": "Electricity & Magnetism",
+          "units": 4,
+          "alt": [
+            "PHYS 23",
+            "PHYS 63"
+          ]
+        },
+        {
+          "code": "ENGR 40M",
+          "title": "Intro to Electronics",
+          "units": 4,
+          "note": "Approved science elective"
+        }
+      ]
+    },
+    "cs_core": {
+      "label": "CS Core",
+      "min_units": 67,
+      "courses": [
+        {
+          "code": "CS 106B",
+          "title": "Programming Abstractions",
+          "units": 5
+        },
+        {
+          "code": "CS 107",
+          "title": "Computer Organization",
+          "units": 5
+        },
+        {
+          "code": "CS 107E",
+          "title": "Computer Org (RPi track)",
+          "units": 5,
+          "alt": [
+            "CS 107"
+          ]
+        },
+        {
+          "code": "CS 109",
+          "title": "Probability for CS",
+          "units": 5
+        },
+        {
+          "code": "CS 110",
+          "title": "Principles of Computer Systems",
+          "units": 5,
+          "alt": [
+            "CS 111"
+          ]
+        },
+        {
+          "code": "CS 111",
+          "title": "Operating Systems Principles",
+          "units": 5,
+          "alt": [
+            "CS 110"
+          ]
+        },
+        {
+          "code": "CS 161",
+          "title": "Algorithms",
+          "units": 5
+        },
+        {
+          "code": "CS 103",
+          "title": "Mathematical Foundations of CS",
+          "units": 5
+        },
+        {
+          "code": "CS 221",
+          "title": "Artificial Intelligence",
+          "units": 4
+        }
+      ]
+    },
+    "systems_requirement": {
+      "label": "Systems Requirement",
+      "note": "One of the following (satisfies with CS Core overlap)",
+      "courses": [
+        {
+          "code": "CS 140",
+          "title": "Operating Systems",
+          "units": 4
+        },
+        {
+          "code": "CS 140E",
+          "title": "Operating Systems (embedded)",
+          "units": 4
+        },
+        {
+          "code": "CS 143",
+          "title": "Compilers",
+          "units": 4
+        },
+        {
+          "code": "CS 144",
+          "title": "Computer Networking",
+          "units": 4
+        },
+        {
+          "code": "CS 145",
+          "title": "Databases",
+          "units": 4
+        },
+        {
+          "code": "CS 149",
+          "title": "Parallel Computing",
+          "units": 4
+        },
+        {
+          "code": "CS 155",
+          "title": "Security",
+          "units": 4
+        },
+        {
+          "code": "CS 190",
+          "title": "Software Design Studio",
+          "units": 4
+        }
+      ]
+    },
+    "tracks": {
+      "AI": {
+        "label": "Artificial Intelligence",
+        "min_depth_units": 21,
+        "required": [
+          {
+            "code": "CS 221",
+            "title": "Artificial Intelligence",
+            "units": 4
+          }
+        ],
+        "electives": [
+          {
+            "code": "CS 224N",
+            "title": "NLP with Deep Learning",
+            "units": 4
+          },
+          {
+            "code": "CS 224S",
+            "title": "Spoken Language Processing",
+            "units": 3
+          },
+          {
+            "code": "CS 224U",
+            "title": "Natural Language Understanding",
+            "units": 4
+          },
+          {
+            "code": "CS 224W",
+            "title": "ML with Graphs",
+            "units": 4
+          },
+          {
+            "code": "CS 228",
+            "title": "Probabilistic Graphical Models",
+            "units": 3
+          },
+          {
+            "code": "CS 229",
+            "title": "Machine Learning",
+            "units": 4
+          },
+          {
+            "code": "CS 229M",
+            "title": "ML Systems",
+            "units": 3
+          },
+          {
+            "code": "CS 231A",
+            "title": "Computer Vision: 3D",
+            "units": 3
+          },
+          {
+            "code": "CS 231N",
+            "title": "Deep Learning for Vision",
+            "units": 4
+          },
+          {
+            "code": "CS 234",
+            "title": "Reinforcement Learning",
+            "units": 4
+          },
+          {
+            "code": "CS 237A",
+            "title": "Autonomous Systems",
+            "units": 3
+          },
+          {
+            "code": "CS 238",
+            "title": "Decision Making Under Uncertainty",
+            "units": 3
+          },
+          {
+            "code": "STATS 315A",
+            "title": "Statistical Learning",
+            "units": 3
+          },
+          {
+            "code": "STATS 315B",
+            "title": "Modern Applied Statistics",
+            "units": 3
+          }
+        ]
+      },
+      "Systems": {
+        "label": "Systems",
+        "min_depth_units": 21,
+        "required": [
+          {
+            "code": "CS 110",
+            "title": "Principles of Computer Systems",
+            "units": 5
+          }
+        ],
+        "electives": [
+          {
+            "code": "CS 140",
+            "title": "Operating Systems",
+            "units": 4
+          },
+          {
+            "code": "CS 140E",
+            "title": "Operating Systems (embedded)",
+            "units": 4
+          },
+          {
+            "code": "CS 143",
+            "title": "Compilers",
+            "units": 4
+          },
+          {
+            "code": "CS 144",
+            "title": "Computer Networking",
+            "units": 4
+          },
+          {
+            "code": "CS 145",
+            "title": "Databases",
+            "units": 4
+          },
+          {
+            "code": "CS 149",
+            "title": "Parallel Computing",
+            "units": 4
+          },
+          {
+            "code": "CS 155",
+            "title": "Security",
+            "units": 4
+          },
+          {
+            "code": "CS 166",
+            "title": "Data Structures",
+            "units": 4
+          },
+          {
+            "code": "CS 190",
+            "title": "Software Design Studio",
+            "units": 4
+          },
+          {
+            "code": "CS 212",
+            "title": "OS & Systems Programming",
+            "units": 4
+          },
+          {
+            "code": "CS 217",
+            "title": "Hardware Accelerators for ML",
+            "units": 4
+          },
+          {
+            "code": "CS 240",
+            "title": "Advanced Topics in OS",
+            "units": 4
+          },
+          {
+            "code": "CS 244",
+            "title": "Advanced Networking",
+            "units": 4
+          },
+          {
+            "code": "CS 245",
+            "title": "Principles of Data-Intensive Systems",
+            "units": 4
+          },
+          {
+            "code": "CS 316",
+            "title": "Advanced Multicore Systems",
+            "units": 4
+          },
+          {
+            "code": "EE 180",
+            "title": "Digital Systems Architecture",
+            "units": 4
+          }
+        ]
+      },
+      "Theory": {
+        "label": "Theory",
+        "min_depth_units": 21,
+        "required": [
+          {
+            "code": "CS 154",
+            "title": "Automata & Complexity",
+            "units": 4
+          },
+          {
+            "code": "CS 161",
+            "title": "Algorithms",
+            "units": 5
+          }
+        ],
+        "electives": [
+          {
+            "code": "CS 154",
+            "title": "Automata & Complexity",
+            "units": 4
+          },
+          {
+            "code": "CS 166",
+            "title": "Data Structures",
+            "units": 4
+          },
+          {
+            "code": "CS 168",
+            "title": "Modern Algorithmic Toolbox",
+            "units": 4
+          },
+          {
+            "code": "CS 255",
+            "title": "Introduction to Cryptography",
+            "units": 4
+          },
+          {
+            "code": "CS 261",
+            "title": "Optimization & Algorithmic Paradigms",
+            "units": 4
+          },
+          {
+            "code": "CS 263",
+            "title": "Counting & Sampling",
+            "units": 4
+          },
+          {
+            "code": "CS 265",
+            "title": "Randomized Algorithms",
+            "units": 4
+          },
+          {
+            "code": "CS 354",
+            "title": "Topics in Intractability",
+            "units": 4
+          },
+          {
+            "code": "CS 361",
+            "title": "Engineering Design Optimization",
+            "units": 4
+          },
+          {
+            "code": "MATH 171",
+            "title": "Fundamental Concepts of Analysis",
+            "units": 4
+          },
+          {
+            "code": "MATH 205A",
+            "title": "Real Analysis",
+            "units": 3
+          },
+          {
+            "code": "MATH 215",
+            "title": "Algebraic Topology",
+            "units": 3
+          }
+        ]
+      },
+      "HCI": {
+        "label": "Human-Computer Interaction",
+        "min_depth_units": 21,
+        "required": [
+          {
+            "code": "CS 147",
+            "title": "HCI Design",
+            "units": 4
+          }
+        ],
+        "electives": [
+          {
+            "code": "CS 147L",
+            "title": "HCI Design Lab",
+            "units": 2
+          },
+          {
+            "code": "CS 193A",
+            "title": "Android Development",
+            "units": 3
+          },
+          {
+            "code": "CS 193P",
+            "title": "iOS Development",
+            "units": 3
+          },
+          {
+            "code": "CS 194",
+            "title": "Software Project",
+            "units": 4
+          },
+          {
+            "code": "CS 194H",
+            "title": "User Interface Design Project",
+            "units": 4
+          },
+          {
+            "code": "CS 210",
+            "title": "Problem Framing for New Tech",
+            "units": 4
+          },
+          {
+            "code": "CS 247",
+            "title": "HCI Design Studio",
+            "units": 4
+          },
+          {
+            "code": "CS 247B",
+            "title": "Design for Behavior Change",
+            "units": 4
+          },
+          {
+            "code": "CS 247G",
+            "title": "Intro to Game Design",
+            "units": 4
+          },
+          {
+            "code": "CS 247I",
+            "title": "Design for AI",
+            "units": 4
+          },
+          {
+            "code": "CS 278",
+            "title": "Social Computing",
+            "units": 4
+          },
+          {
+            "code": "CS 347",
+            "title": "Human-AI Interaction",
+            "units": 4
+          },
+          {
+            "code": "PSYCH 70",
+            "title": "Social Psychology",
+            "units": 4
+          }
+        ]
+      },
+      "Unspecialized": {
+        "label": "Unspecialized",
+        "min_depth_units": 21,
+        "note": "Any 21+ units of CS courses numbered 100+",
+        "electives": [
+          {
+            "code": "CS 100+",
+            "title": "Any CS course numbered 100 or above",
+            "units": 3
+          }
+        ]
+      }
+    },
+    "senior_capstone": {
+      "label": "Senior Capstone / Project",
+      "note": "One of the following",
+      "courses": [
+        {
+          "code": "CS 191",
+          "title": "Senior Project",
+          "units": 3
+        },
+        {
+          "code": "CS 191W",
+          "title": "Senior Project (writing)",
+          "units": 4
+        },
+        {
+          "code": "CS 194",
+          "title": "Software Project",
+          "units": 4
+        },
+        {
+          "code": "CS 194H",
+          "title": "User Interface Design Project",
+          "units": 4
+        },
+        {
+          "code": "CS 194W",
+          "title": "Software Project (writing)",
+          "units": 4
+        },
+        {
+          "code": "CS 210B",
+          "title": "Tech Venture Formation Lab",
+          "units": 4
+        }
+      ]
+    },
+    "ways": {
+      "label": "WAYs General Education",
+      "note": "7 WAYs required — at least 1 course per Way",
+      "ways": [
+        {
+          "code": "WAY-AII",
+          "label": "Aesthetic and Interpretive Inquiry"
+        },
+        {
+          "code": "WAY-AQR",
+          "label": "Applied Quantitative Reasoning"
+        },
+        {
+          "code": "WAY-CE",
+          "label": "Creative Expression"
+        },
+        {
+          "code": "WAY-EDP",
+          "label": "Engaging Difference and Power"
+        },
+        {
+          "code": "WAY-ER",
+          "label": "Ethical Reasoning"
+        },
+        {
+          "code": "WAY-FR",
+          "label": "Formal Reasoning"
+        },
+        {
+          "code": "WAY-SI",
+          "label": "Social Inquiry"
+        },
+        {
+          "code": "WAY-SMA",
+          "label": "Scientific Method and Analysis"
+        }
+      ],
+      "sample_courses": [
+        {
+          "code": "THINK 35",
+          "title": "Well-Being Science",
+          "ways": [
+            "WAY-SMA"
+          ]
+        },
+        {
+          "code": "PHIL 81",
+          "title": "Mind, Matter & God",
+          "ways": [
+            "WAY-AII",
+            "WAY-ER"
+          ]
+        },
+        {
+          "code": "POLISCI 1",
+          "title": "Intro to Politics",
+          "ways": [
+            "WAY-SI"
+          ]
+        },
+        {
+          "code": "MUSIC 1",
+          "title": "Fundamentals of Music",
+          "ways": [
+            "WAY-CE"
+          ]
+        }
+      ]
+    },
+    "writing": {
+      "label": "Writing in the Major (WIM)",
+      "courses": [
+        {
+          "code": "CS 181W",
+          "title": "Computers, Ethics & Public Policy (WIM)",
+          "units": 5
+        },
+        {
+          "code": "CS 182W",
+          "title": "Ethics of AI (WIM)",
+          "units": 5
+        },
+        {
+          "code": "CS 191W",
+          "title": "Senior Project (WIM)",
+          "units": 4
+        },
+        {
+          "code": "CS 194W",
+          "title": "Software Project (WIM)",
+          "units": 4
+        }
+      ]
+    }
+  }
+}
